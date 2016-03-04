@@ -21,7 +21,7 @@ function manageReading(reading) {
     //This is the first part of the script: Registering the sensor as root asset. Only once
    // Define a table with the JASON registration info 
     local Registeration_Data = {
-    apiKey = "271c0e74-90ca-4598-800b-4e0339de9d55",
+    apiKey = "271c0e74-90ca-4598-800b-4e0339de9d55", //THE API HAS TO EXIST/GENERATED FROM THE SERVER, DEVELOPER SECTION
     srNo = reading.id, //it gets the device serial number from the "reading"
     assetName ="electric imp Env Tail",
     assetTypeCode = "embedded-sensor",
@@ -94,16 +94,12 @@ function manageReading(reading) {
         local body = http.jsonencode(AssetMetric_Data);
         server.log(body);
  
-        local url = "http://demo8.esprida.com/agentapi/assetmetrics";
+        local url = "http://EXAMPLE.esprida.com/agentapi/assetmetrics"; //THIS IS NOT A WORKING URL, IT'S AN EXAMPLE ONLY
         local headers = {"Content-Type": "application/json", "Authorization" : "Basic " + http.base64encode(assetLogin + ":" + "")};
     
         local request = http.post(url, headers, body);
         local response = request.sendsync();
         server.log(response.statuscode);
-        imp.sleep(300) //sleep for 5 min
-        //Or you can use imp deep sleep instead for power saving
-        //imp.onidle(function(){ imp.deepsleepfor(300); });
-
 }
 //This function converts the timestamp sent with the temerpature in UTC to ISO8601
 function currentISO8601(){
