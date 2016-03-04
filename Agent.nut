@@ -32,7 +32,7 @@ function manageReading(reading) {
 
     # POST the registration data with JSON 
 
-    local reg_url = "http://demo8.esprida.com/agentapi/register"
+    local reg_url = "http://EXAMPLE.esprida.com/agentapi/register" //THIS IS NOT A WORKING URL, IT'S AN EXAMPLE ONLY
     local reg_headers = {"content-type": "application/json"} #This is general/default
     
     local reg_request = http.post(reg_url, reg_headers, reg_body);
@@ -101,9 +101,11 @@ function manageReading(reading) {
         local response = request.sendsync();
         server.log(response.statuscode);
         imp.sleep(300) //sleep for 5 min
+        //Or you can use imp deep sleep instead for power saving
+        //imp.onidle(function(){ imp.deepsleepfor(300); });
 
 }
-//This function converts the timestamp sent with the temerpature from UTC to ISO8601
+//This function converts the timestamp sent with the temerpature in UTC to ISO8601
 function currentISO8601(){
     local dt = date().year + "-"
     local timeArray = [(date().month+1), date().day, date().hour, date().min, date().sec]
